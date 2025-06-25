@@ -43,7 +43,19 @@ function playGame(playerChoiceIndex) {
     // プレイヤーが負ける場合の文章はRESULTS.LOSE
     // playerChoiceIndexが0のとき =「プレイヤーの手がグー」
     // computerChoiceIndexが2のとき =「コンピューターの手がパー」
-
+ if (
+        (playerChoiceIndex === 0 && computerChoiceIndex === 1) || // グー vs チョキ
+        (playerChoiceIndex === 1 && computerChoiceIndex === 2) || // チョキ vs パー
+        (playerChoiceIndex === 2 && computerChoiceIndex === 0)    // パー vs グー
+    ) {
+        resultText = RESULTS.WIN; // プレイヤーの勝ち
+    } else if (
+        (playerChoiceIndex === 0 && computerChoiceIndex === 2) || // グー vs パー
+        (playerChoiceIndex === 1 && computerChoiceIndex === 0) || // チョキ vs グー
+        (playerChoiceIndex === 2 && computerChoiceIndex === 1)    // パー vs チョキ
+    ) {
+        resultText = RESULTS.LOSE; // プレイヤーの負け
+    }
     
 
 

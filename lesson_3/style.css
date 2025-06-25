@@ -1,0 +1,150 @@
+/* 全体のスタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #ffe4b5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    animation: background-pulse 3s infinite alternate;
+}
+
+/* 背景のアニメーション */
+@keyframes background-pulse {
+    0% {
+        background-color: #ffe4b5;
+    }
+    100% {
+        background-color: #ffdab9;
+    }
+}
+
+/* 見出しのスタイル */
+h1 {
+    text-align: center;
+    font-size: 3em;
+    color: #d35400;
+    text-shadow: 2px 2px #f39c12;
+    animation: bounce 2s infinite;
+}
+
+/* 見出しのバウンドアニメーション */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* 日付のスタイル */
+#date {
+    text-align: center;
+    font-style: italic;
+    color: #7f8c8d;
+    animation: fade-in 3s infinite alternate;
+}
+
+/* フェードインアニメーション */
+@keyframes fade-in {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 段落のスタイル */
+p {
+    margin: 15px 0;
+    text-indent: 1em;
+}
+
+/* 特定の段落の強調 */
+#dancing-chicken, #solo-dance, #finale {
+    font-weight: bold;
+    color: #e74c3c;
+    background-color: #fdebd0;
+    padding: 10px;
+    border-left: 5px solid #e67e22;
+    animation: shake 1s infinite;
+}
+
+/* シェイクアニメーション */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* 動画のスタイル */
+video {
+    display: block;
+    margin: 20px auto;
+    border: 3px solid #d35400;
+    border-radius: 10px;
+    animation: rotate 5s infinite linear;
+}
+
+/* 回転アニメーション */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* リストのスタイル */
+ol {
+    margin: 20px;
+    padding-left: 40px;
+    animation: slide-in 2s ease-out;
+}
+
+/* スライドインアニメーション */
+@keyframes slide-in {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+ol li {
+    margin: 10px 0;
+    color: #2980b9;
+}
+
+/* 結論のスタイル */
+#conclusion {
+    text-align: center;
+    font-size: 1.2em;
+    font-style: italic;
+    color: #16a085;
+    margin-top: 30px;
+    animation: pulse 2s infinite;
+}
+
+/* パルスアニメーション */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
