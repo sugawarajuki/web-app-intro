@@ -13,10 +13,11 @@ BASE_DIR = os.path.dirname(__file__)
 DB_PATH = os.path.join(BASE_DIR, "data.db")
 
 
-class DataBase(BaseModel):
+class Training(BaseModel):
     id: Optional[int] = None
-    value_1: str
-    value_2: Optional[str] = None
+    exercise: str
+    sets: int
+    reps: int
 
 
 def get_db_connection():
@@ -30,10 +31,11 @@ def initialize_db():
     cursor = conn.cursor()
     cursor.execute(
         """
-        CREATE TABLE IF NOT EXISTS data (
+        CREATE TABLE IF NOT EXISTS trainings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            value_1 TEXT NOT NULL,
-            value_2 TEXT
+            exercise TEXT NOT NULL,
+            sets INTEGER NOT NULL,
+            reps INTEGER NOT NULL
         )
         """
     )
@@ -41,29 +43,30 @@ def initialize_db():
     conn.close()
 
 
-@app.get("/data", response_model=List[DataBase])
-def read_data_items():
+@app.get("/trainings", response_model=List[Training])
+def read_trainings():
     conn = get_db_connection()
-    items = conn.execute("SELECT * FROM data").fetchall()
+    items = conn.execute("SELECT * FROM trainings").fetchall()
     conn.close()
-    return [DataBase(**dict(item)) for item in items]
+    return [Training(**dict(item)) for item in items]
 
 
-@app.post("/data", response_model=DataBase, status_code=201)
-def create_data_item(item: DataBase):
+@app.post("/trainings", response_model=Training, status_code=201)
+def create_training(item: Training):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(
-        "INSERT INTO data (value_1, value_2) VALUES (?, ?)",
-        (item.value_1, item.value_2),
+        "INSERT INTO trainings (exercise, sets, reps) VALUES (?, ?, ?)",
+        (item.exercise, item.sets, item.reps),
     )
     conn.commit()
     item_id = cursor.lastrowid
     conn.close()
-    return DataBase(
+    return Training(
         id=item_id,
-        value_1=item.value_1,
-        value_2=item.value_2,
+        exercise=item.exercise,
+        sets=item.sets,
+        reps=item.reps,
     )
 
 
