@@ -1,40 +1,9 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <div class="container">
-        <h1>Todo List</h1>
-
-        <form id="add-todo-form">
-            <h2>Add New Todo</h2>
-            <div>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
-            </div>
-            <div>
-                <label for="description">Description (Optional):</label>
-                <input type="text" id="description" name="description">
-            </div>
-            <button type="submit">Add Todo</button>
-            <div id="add-error" class="error-message"></div>
-        </form>
-
-        <h2>Current Todos</h2>
-        <ul id="todo-list">
-        </ul>
-        <div id="list-error" class="error-message"></div>
-    </div>
-
-    <script src="script.js"></script>
-
-</body>
-
-</html>
+<!-- ...既存のコード... -->
+<form id="add-training-form">
+  <input type="text" id="exercise" placeholder="種目" required>
+  <input type="number" id="sets" placeholder="セット数" min="1" required>
+  <input type="number" id="reps" placeholder="回数" min="1" required>
+  <button type="submit">追加</button>
+</form>
+<ul id="training-list"></ul>
+<!-- ...既存のコード... -->

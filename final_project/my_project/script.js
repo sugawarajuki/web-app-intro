@@ -1,62 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const dataList = document.getElementById('data-list');
-    const addDataForm = document.getElementById('add-data-form');
-    const value1Input = document.getElementById('value1');
-    const value2Input = document.getElementById('value2');
+    const trainingList = document.getElementById('training-list');
+    const addTrainingForm = document.getElementById('add-training-form');
+    const exerciseInput = document.getElementById('exercise');
+    const setsInput = document.getElementById('sets');
+    const repsInput = document.getElementById('reps');
 
-    // データ一覧を取得して表示する関数
-    async function fetchData() {
-        try {
-            const response = await fetch('/data');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            dataList.innerHTML = ''; // 既存のリストをクリア
-            data.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `ID: ${item.id}, 値1: ${item.value_1}, 値2: ${item.value_2 || 'N/A'}`;
-                dataList.appendChild(listItem);
-            });
-        } catch (error) {
-            console.error('データの取得に失敗しました:', error);
-            dataList.innerHTML = '<li>データの取得に失敗しました。</li>';
-        }
+    // 保存用配列
+    let trainings = [];
+
+    // 保存内容を表示
+    function renderTrainings() {
+        trainingList.innerHTML = '';
+        trainings.forEach((item, idx) => {
+            const li = document.createElement('li');
+            li.textContent = `種目: ${item.exercise}, セット数: ${item.sets}, 回数: ${item.reps}`;
+            trainingList.appendChild(li);
+        });
     }
 
-    // データ追加フォームの送信イベントリスナー
-    addDataForm.addEventListener('submit', async (event) => {
-        event.preventDefault(); // デフォルトのフォーム送信をキャンセル
+    // フォーム送信イベント
+    addTrainingForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const exercise = exerciseInput.value.trim();
+        const sets = setsInput.value;
+        const reps = repsInput.value;
 
-        const value1 = value1Input.value;
-        const value2 = value2Input.value;
-
-        try {
-            const response = await fetch('/data', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ value_1: value1, value_2: value2 }),
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            // フォームをクリア
-            value1Input.value = '';
-            value2Input.value = '';
-
-            // データ一覧を再読み込み
-            await fetchData();
-
-        } catch (error) {
-            console.error('データの追加に失敗しました:', error);
-            alert('データの追加に失敗しました。');
+        if (exercise && sets && reps) {
+            trainings.push({ exercise, sets, reps });
+            renderTrainings();
+            exerciseInput.value = '';
+            setsInput.value = '';
+            repsInput.value = '';
         }
     });
 
-    // 初期データの読み込み
-    fetchData();
+    renderTrainings();
 });
